@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
+// import { toJS } from 'immutable';
 import { actionCreator } from './store';
 import {
   HeaderWrapper,
@@ -16,13 +18,20 @@ import {
   SeachInfoItem,
   SearchInfoList
 } from './style';
-import { CSSTransition } from 'react-transition-group';
 
 class Header extends Component {
-  getListArea (show) {
-    if (show) {
+  getListArea () {
+    const { focused, mousedIn, list, page, handleMouseEnter, handleMouseLeave } = this.props
+    const curList = []
+    const newList = list.toJS()
+    for (let i = (page - 1) * 10; i < page * 10; i++) {
+      curList.push(<SeachInfoItem key={newList[i]}>{newList[i]}</SeachInfoItem>)
+    }
+    if (focused || mousedIn) {
       return (
-        <SearchInfo>
+        <SearchInfo
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
           <SearchInfoTitle>热门搜索
             <SearchInfoSwitch>
               {/* <span className="iconfont">&#xe636;</span> */}
@@ -30,12 +39,7 @@ class Header extends Component {
             </SearchInfoSwitch>
           </SearchInfoTitle>
           <SearchInfoList>
-            <SeachInfoItem>历史</SeachInfoItem>
-            <SeachInfoItem>历史</SeachInfoItem>
-            <SeachInfoItem>历史</SeachInfoItem>
-            <SeachInfoItem>历史</SeachInfoItem>
-            <SeachInfoItem>历史</SeachInfoItem>
-            <SeachInfoItem>历史</SeachInfoItem>
+            {curList}
           </SearchInfoList>
         </SearchInfo>
       )
@@ -69,7 +73,7 @@ class Header extends Component {
             ></NavSearch>
           </CSSTransition>
           <i className={focused ? 'iconfont focused': 'iconfont'}>&#xe62d;</i>
-          {this.getListArea(focused)}
+          {this.getListArea()}
         </SearchWrapper>
       </Nav>
       <Addition>
@@ -95,12 +99,23 @@ class Header extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    focused: state.getIn(['header', 'focused'])
+    focused: state.getIn(['header', 'focused']),
+    mousedIn: state.get(['header', 'mousedIn']),
+    list: state.getIn(['header', 'list']),
+    total: state.getIn(['header', 'total']),
+    page: state.getIn(['header', 'page'])
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    handleMouseEnter () {
+      dispatch(actionCreator.mouseEnter())
+    },
+    handleMouseLeave () {
+      dispatch(actionCreator.mouseLeave())
+    },
     handleInputFocus () {
+      dispatch(actionCreator.getList())
       dispatch(actionCreator.inputFocus())
     },
     handleInputBlur () {
