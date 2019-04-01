@@ -1,4 +1,4 @@
-import * as actionTypes from './constants';
+import * as actionTypes from './actionTypes';
 import { fromJS } from 'immutable';
 import axios from 'axios';
 export const inputBlur = () => ({ type: actionTypes.INPUT_BLUR })

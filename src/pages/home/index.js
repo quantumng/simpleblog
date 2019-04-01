@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+// import * as actionCreator from '../home/store/actionCreator';
 import {
   HomeWrapper,
   HomeLeft,
   HomeRight,
-  // Topic,
-  // List,
-  // Recommend,
-  // Writer
-  // BackTop
+  CategoryWrapper,
+  CategoryItem,
+  LoadMore,
+  BackTop
 } from './style';
 class Home extends Component {
+  componentDidMount () {
+  }
   render () {
     return (<HomeWrapper>
       <HomeLeft>
-        <div className='banner-img'></div>
-        {/* <Topic />
-        <List /> */}
+        <LoadMore></LoadMore>
       </HomeLeft>
       <HomeRight>
-        {/* <Recommend /> */}
-        {/* <Writer /> */}
+        <CategoryWrapper>
+          <CategoryItem></CategoryItem>
+        </CategoryWrapper>
       </HomeRight>
-      {/* { this.props.showScroll ? <BackTop onClick={this.handleScrollTop}>顶部</BackTop> : null} */}
+      { this.props.showScroll ? <BackTop onClick={this.handleScrollTop}>顶部</BackTop> : null}
     </HomeWrapper>)
   }
 }
-
-export default Home
+const mapStateToProps = state => {
+  return {}
+}
+const mapDispatchToProps = dispatct => {
+  return {}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
