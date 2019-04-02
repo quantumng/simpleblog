@@ -5,6 +5,7 @@ import store from './store';
 import GlobalComp from './style';
 import GlobalIcon from './static/iconfont/iconfont';
 import Header from './common/header/index.js';
+import Asider from './common/aside/index.js';
 import Home from './pages/home';
 import Details from './pages/detail';
 
@@ -15,6 +16,7 @@ class App extends Component {
         <GlobalComp />
         <GlobalIcon />
         <Header />
+        <Asider />
         <BrowserRouter>
           <div>
             <Route path={'/'} exact component={Home}></Route>

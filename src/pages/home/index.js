@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import {
   HomeWrapper,
   HomeLeft,
-  HomeRight,
-  CategoryWrapper,
-  CategoryItem,
-  LoadMore,
   BackTop
 } from './style';
 class Home extends Component {
@@ -16,13 +12,7 @@ class Home extends Component {
   render () {
     return (<HomeWrapper>
       <HomeLeft>
-        <LoadMore></LoadMore>
       </HomeLeft>
-      <HomeRight>
-        <CategoryWrapper>
-          <CategoryItem></CategoryItem>
-        </CategoryWrapper>
-      </HomeRight>
       { this.props.showScroll ? <BackTop onClick={this.handleScrollTop}>顶部</BackTop> : null}
     </HomeWrapper>)
   }
