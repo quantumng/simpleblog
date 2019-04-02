@@ -3,15 +3,15 @@ import * as actionTypes from './actionTypes'
 
 export const initCategoryList = (data) => {
   return {
-    action: actionTypes.INIT_CATEGORY_LIST,
+    type: actionTypes.INIT_CATEGORY_LIST,
     list: data
   }
 }
 
 export const getCategoryList = () => {
   return async (dispatch) => {
-    let data = await categoryApi.list()
-    const action = initCategoryList(data)
+    let {result} = await categoryApi.list()
+    const action = initCategoryList(result)
     dispatch(action)
   }
 }

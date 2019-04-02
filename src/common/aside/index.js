@@ -12,11 +12,12 @@ class Asider extends React.Component {
     this.props.getCategoryList()
   }
   render() {
+    const { categoryList } = this.props
     return (
         <HomeRight>
         <h3>分类目录</h3>
         <CategoryWrapper>
-          <CategoryItem></CategoryItem>
+          { categoryList.map(item => <CategoryItem key={item._id}>{`${item.name}(${item.pages.length})`}</CategoryItem>) }
         </CategoryWrapper>
       </HomeRight>
     );
@@ -24,7 +25,7 @@ class Asider extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    // categoryList: state.get('categoryList', )
+    categoryList: state.getIn(['aside', 'categoryList'])
   }
 }
 const mapDispatchToProps = dispatch => {
