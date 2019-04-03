@@ -1,12 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import * as actionCreator from '../../../home/store/actionCreator';
 import {
+  BreadNav,
   PageContent
 } from './style';
 
 class Page extends Component {
+  componentDidMount () {
+    this.props.getPageData()
+  }
   render () {
     return <Fragment>
+      <BreadNav></BreadNav>
       <PageContent>
         <div className={'title'}></div>
         <div className={'content'}>
@@ -22,8 +28,15 @@ class Page extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    pageData: state.pageData
+    pageData: state.getIn(['home', 'pageData'])
   }
 }
-
-export default connect(mapStateToProps)(Page)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getPageData: () => {
+      const action = actionCreator.getPageData()
+      dispatch(action)
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Page)

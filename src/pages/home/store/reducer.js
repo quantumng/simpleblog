@@ -3,7 +3,11 @@ import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
   categoryList: [],
-  pageList: []
+  pageList: [],
+  data: {},
+  currentPage: 1,
+  showScroll: false,
+  hasMorePage: true
 })
 
 export default (state = defaultState, action) => {
@@ -12,6 +16,18 @@ export default (state = defaultState, action) => {
       return state.set('categoryList', action.list)
     case actionTypes.INIT_PAGE_LIST:
       return state.set('pageList', action.list)
+    case actionTypes.INIT_PAGE_DATA:
+      return state.set('data', action.data)
+    case actionTypes.TOGGLE_SCROLL_TOP:
+      return state.set('showScroll', action.showScroll)
+    case actionTypes.ADD_PAGE_LIST:
+      if (!action.list.length) {
+        return state.set('hasMorePage', false)
+      }
+      return state.merge({
+        'pageList': state.get('pageList').concat(action.list),
+        'currentPage': action.nextPage
+      })
     default:
       return state
   }

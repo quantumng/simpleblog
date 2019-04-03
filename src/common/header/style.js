@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import logoUrl from '../../static/blog-logo.png'
 export const HeaderWrapper = styled.div`
   height:58px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #ddd;
   position: relative;
 `
 export const Logo = styled.a`

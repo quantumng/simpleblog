@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import * as actionCreator from './store/actionCreator';
 import {
   HomeRight,
@@ -15,9 +16,19 @@ class Asider extends React.Component {
     const { categoryList } = this.props
     return (
         <HomeRight>
-        <h3>分类目录</h3>
         <CategoryWrapper>
-          { categoryList.map(item => <CategoryItem key={item._id}>{`${item.name}(${item.pages.length})`}</CategoryItem>) }
+          <h2 className={'title'}>分类目录</h2>
+          { categoryList.map(item => {
+            return (
+              <CategoryItem key={item._id}>
+                <Router>
+                  <Link to={{
+                    pathname: `/category/${item._id}`
+                  }}>{`${item.name}(${item.pages.length})`}</Link>
+                </Router>
+              </CategoryItem>
+            )
+          }) }
         </CategoryWrapper>
       </HomeRight>
     );
