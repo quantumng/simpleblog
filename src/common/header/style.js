@@ -16,7 +16,7 @@ export const Logo = styled.a`
   background-size: contain;
 `
 export const Nav = styled.div`
-  width: 60%;
+  width: 70%;
   height: 100%;
   box-sizing: border-box;
   padding-right: 70px;
@@ -26,7 +26,9 @@ export const NavItem = styled.div`
   line-height: 56px;
   padding: 0 15px;
   font-size: 16px;
-  color: #333;
+  a {
+    color: #000;
+  }
   &.left {
     float: left;
   }

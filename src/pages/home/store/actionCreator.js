@@ -56,10 +56,10 @@ const initPageData = (data) => {
   }
 }
 
-export const getPageData = () => {
+export const getPageData = (params) => {
   return async (dispatch) => {
-    let data = await pageApi.detail()
-    const action = initPageData(data)
+    let { result } = await pageApi.detail(params)
+    const action = initPageData(result)
     dispatch(action)
   }
 }

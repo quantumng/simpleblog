@@ -6,6 +6,7 @@ import GlobalIcon from './static/iconfont/iconfont';
 import Header from './common/header/index.js';
 import Asider from './common/aside/index.js';
 import Home from './pages/home';
+import { BrowserRouter as Router} from 'react-router-dom';
 
 class App extends Component {
   render() {
@@ -13,9 +14,13 @@ class App extends Component {
       <Provider store={store}>
         <GlobalComp />
         <GlobalIcon />
-        <Header />
-        <Asider />
-        <Home></Home>
+        <Router>
+          <div>
+            <Header />
+            <Asider />
+            <Home />
+          </div>
+        </Router>
       </Provider>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { toJS } from 'immutable';
+import {Link} from 'react-router-dom';
 // import { actionCreator } from './store';
 import {
   HeaderWrapper,
@@ -15,9 +15,8 @@ class Header extends Component {
     <HeaderWrapper>
       <Logo href={'/'} />
       <Nav>
-        <NavItem className='left'>首页</NavItem>
-        <NavItem className='left'>关于我</NavItem>
-        <NavItem className='right'>登录</NavItem>
+        <NavItem className='left'><Link to="/">首页</Link></NavItem>
+        <NavItem className='left'><a href={'//admin.degebug.com'}>博客后台</a></NavItem>
       </Nav>
     </HeaderWrapper>
     )

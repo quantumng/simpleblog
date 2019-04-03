@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import * as actionCreator from '../home/store/actionCreator';
 import PageItem from './components/pageItem';
 import Details from './components/detail';
@@ -23,13 +23,11 @@ class Home extends Component {
   }
   render () {
     return (<HomeWrapper>
-      <BrowserRouter>
-        <div>
-          <Route path={'/'} exact component={PageItem}></Route>
-          <Route path={'/category/:id'} exact component={PageItem}></Route>
-          <Route path="/details" exact component={Details}></Route>
-        </div>
-      </BrowserRouter>
+      <div>
+        <Route path={'/'} exact component={PageItem}></Route>
+        <Route path={'/category/:id'} exact component={PageItem}></Route>
+        <Route path={"/details/:id"} exact component={Details}></Route>
+      </div>
       { this.props.showScroll ? <BackTop onClick={this.handleScrollTop}>Top</BackTop> : null}
     </HomeWrapper>)
   }

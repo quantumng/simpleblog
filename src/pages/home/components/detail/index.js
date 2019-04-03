@@ -1,29 +1,39 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actionCreator from '../../../home/store/actionCreator';
 import {
-  BreadNav,
   PageContent
 } from './style';
 
 class Page extends Component {
-  componentDidMount () {
-    this.props.getPageData()
-  }
   render () {
-    return <Fragment>
-      <BreadNav></BreadNav>
-      <PageContent>
-        <div className={'title'}></div>
-        <div className={'content'}>
-          <a href={'/'} className={'read-more'}>阅读更多</a>
-        </div>
-        <div className={'info'}>
-          <div className={'author'}></div>
-          <div className={'comment'}></div>
-        </div>
-      </PageContent>
-    </Fragment>
+    const { pageData } = this.props
+    const { title, content, author, category } = pageData
+    const { nickname } = author
+    const { name } = category
+    const createSetup = (content) => {
+      return {__html: content}
+    }
+    if (nickname) {
+      return <Fragment>
+        <PageContent>
+          <div className={'title'}>{title}</div>
+          <div className={'info'}>
+            <span className={'author'}>作者：{nickname}</span>
+            <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span className={'comment'}>分类：{name}</span>
+          </div>
+          <div className={'content'}>
+          <div dangerouslySetInnerHTML={createSetup(content)}></div>
+          </div>
+        </PageContent>
+      </Fragment>
+    }
+  }
+  componentDidMount () {
+    const { match: { params: { id } }, getPageData } = this.props
+    getPageData(id)
   }
 }
 const mapStateToProps = (state) => {
@@ -33,10 +43,10 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getPageData: () => {
-      const action = actionCreator.getPageData()
+    getPageData: (params) => {
+      const action = actionCreator.getPageData(params)
       dispatch(action)
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Page)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Page))

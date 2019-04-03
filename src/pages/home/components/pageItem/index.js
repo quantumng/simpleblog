@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom';
 import * as actionCreator from '../../../home/store/actionCreator';
 import {
   PageContent,
@@ -9,14 +9,14 @@ import {
 
 function Content (props) {
   const { data } = props
-  const { title, desc, author, comment } = data
+  const { title, desc, author, comment, _id } = data
   const commentCount = comment.length
   const authorName = author.nickname
   return <div>
-    <div className={'title'}>{title}</div>
+    <Link className={'title'} to={`/details/${_id}`}>{title}</Link>
     <div className={'content'}>
     {desc}
-      <a href={'/'} className={'read-more'}>阅读更多</a>
+      <Link to={`/details/${_id}`} className={'read-more'}>阅读更多</Link>
     </div>
     <div className={'info'}>
       <span className={'author'}>作者：{authorName}</span>

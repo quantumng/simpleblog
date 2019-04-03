@@ -8,8 +8,13 @@ export const PageContent = styled.div`
   margin: 20px auto;
   box-sizing: border-box;
   .title {
+    display: block;
+    width: 100%;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    color: #000;
+    font-weight: 600;
+    box-sizing: border-box;
   }
   .content {
     line-height: 30px;
@@ -17,6 +22,8 @@ export const PageContent = styled.div`
     padding: 10px;
     text-index: 2em;
     .read-more {
+      text-decoration: underline;
+      color: #666;
       margin-left: 10px;
     }
   }
