@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 // import { actionCreator } from './store';
@@ -9,14 +9,14 @@ import {
   NavItem
 } from './style';
 
-class Header extends Component {
+class Header extends PureComponent {
   render () { 
     return (
     <HeaderWrapper>
-      <Logo href={'/'} />
+      <Link to="/"><Logo /></Link>
       <Nav>
         <NavItem className='left'><Link to="/">首页</Link></NavItem>
-        <NavItem className='left'><a href={'//admin.degebug.com'}>博客后台</a></NavItem>
+        <NavItem className='left'><a target={'_blank'} href={'//admin.degebug.com'}>博客后台</a></NavItem>
       </Nav>
     </HeaderWrapper>
     )

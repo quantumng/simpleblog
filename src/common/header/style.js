@@ -5,8 +5,7 @@ export const HeaderWrapper = styled.div`
   border-bottom: 1px solid #ddd;
   position: relative;
 `
-export const Logo = styled.a`
-  display: block;
+export const Logo = styled.div`
   position: absolute;
   top: 0;
   left: 50px;
@@ -14,13 +13,19 @@ export const Logo = styled.a`
   height: 56px;
   background: url(${logoUrl});
   background-size: contain;
+  @media screen and (max-width:769px) {
+    left: 50%;
+    transform: translateX(-50%);
+	}
 `
 export const Nav = styled.div`
   width: 70%;
   height: 100%;
   box-sizing: border-box;
-  padding-right: 70px;
   margin: 0 auto;
+  @media screen and (max-width:769px) {
+		display: none;
+	}
 `
 export const NavItem = styled.div`
   line-height: 56px;

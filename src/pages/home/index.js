@@ -1,44 +1,68 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
-import * as actionCreator from '../home/store/actionCreator';
+import { Link } from 'react-router-dom';
+import * as actionCreator from './store/actionCreator';
 import PageItem from './components/pageItem';
-import Details from './components/detail';
+
 import {
   HomeWrapper,
+  HomeLeft,
+  HomeRight,
+  CategoryWrapper,
+  CategoryItem,
   BackTop
 } from './style';
-class Home extends Component {
-  handleScrollTop () {
-    window.scrollTo(0, 0)
-  }
+class Home extends PureComponent {
   componentDidMount () {
+    this.props.getCategoryList()
     this.bindEvents()
   }
   componentWillUnmount () {
-    window.releaseEvents('scroll', this.props.changeScrollTopShow)
+    window.removeEventListener('scroll', this.props.changeScrollTopShow)
   }
   bindEvents () {
     window.addEventListener('scroll', this.props.changeScrollTopShow)
   }
+  handleScrollTop () {
+    window.scrollTo(0, 0)
+  }
   render () {
-    return (<HomeWrapper>
-      <div>
-        <Route path={'/'} exact component={PageItem}></Route>
-        <Route path={'/category/:id'} exact component={PageItem}></Route>
-        <Route path={"/details/:id"} exact component={Details}></Route>
-      </div>
-      { this.props.showScroll ? <BackTop onClick={this.handleScrollTop}>Top</BackTop> : null}
-    </HomeWrapper>)
+    const { categoryList, showScroll } = this.props
+    return (
+      <HomeWrapper>
+        <HomeRight>
+          <CategoryWrapper>
+            <h2 className={'title'}>分类目录</h2>
+            { categoryList.map(item => {
+              return (
+                <CategoryItem key={item._id}>
+                    <Link to={{
+                      pathname: `/category/${item._id}`
+                    }}>{`${item.name}(${item.pages.length})`}</Link>
+                </CategoryItem>
+              )
+            }) }
+          </CategoryWrapper>
+        </HomeRight>
+        <HomeLeft>
+          <PageItem></PageItem>
+        </HomeLeft>
+        { showScroll ? <BackTop onClick={this.handleScrollTop}>Top</BackTop> : null}
+      </HomeWrapper>)
   }
 }
 const mapStateToProps = state => {
   return {
+    categoryList: state.getIn(['home', 'categoryList']),
     showScroll: state.getIn(['home', 'showScroll'])
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
+    getCategoryList: () => {
+      const action = actionCreator.getCategoryList()
+      dispatch(action)
+    },
     changeScrollTopShow (e) {
       if (document.documentElement.scrollTop > 200) {
         const action = actionCreator.toggleTopShow(true)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import * as actionCreator from '../../../home/store/actionCreator';
@@ -13,10 +13,10 @@ function Content (props) {
   const commentCount = comment.length
   const authorName = author.nickname
   return <div>
-    <Link className={'title'} to={`/details/${_id}`}>{title}</Link>
+    <Link className={'title'} target="_blank" to={`/details/${_id}`}>{title}</Link>
     <div className={'content'}>
     {desc}
-      <Link to={`/details/${_id}`} className={'read-more'}>阅读更多</Link>
+      <Link to={`/details/${_id}`} target="_blank" className={'read-more'}>阅读更多</Link>
     </div>
     <div className={'info'}>
       <span className={'author'}>作者：{authorName}</span>
@@ -26,7 +26,7 @@ function Content (props) {
   </div>
 }
 
-class Page extends Component {
+class Page extends PureComponent {
   componentDidMount () {
     this.getList()
   }

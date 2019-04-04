@@ -4,7 +4,6 @@ import { fromJS } from 'immutable';
 const defaultState = fromJS({
   categoryList: [],
   pageList: [],
-  pageData: {},
   currentPage: 1,
   showScroll: false,
   hasMorePage: true
@@ -16,8 +15,6 @@ export default (state = defaultState, action) => {
       return state.set('categoryList', action.list)
     case actionTypes.INIT_PAGE_LIST:
       return state.set('pageList', action.list)
-    case actionTypes.INIT_PAGE_DATA:
-      return state.set('pageData', action.data)
     case actionTypes.TOGGLE_SCROLL_TOP:
       return state.set('showScroll', action.showScroll)
     case actionTypes.ADD_PAGE_LIST:

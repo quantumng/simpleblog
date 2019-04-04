@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux-immutable';
-import { reducer as asideReducer } from '../common/aside/store';
+import { reducer as detailReducer } from '../pages/detail/store';
 import { reducer as homeReducer } from '../pages/home/store';
 const reducer = combineReducers({
-  aside: asideReducer,
+  detail: detailReducer,
   home: homeReducer
 })
 export default reducer

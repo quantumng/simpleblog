@@ -43,23 +43,8 @@ export const initCategoryList = (data) => {
 
 export const getCategoryList = () => {
   return async (dispatch) => {
-    let data = await categoryApi.list()
-    const action = initCategoryList(data)
-    dispatch(action)
-  }
-}
-
-const initPageData = (data) => {
-  return {
-    type: actionTypes.INIT_PAGE_DATA,
-    data
-  }
-}
-
-export const getPageData = (params) => {
-  return async (dispatch) => {
-    let { result } = await pageApi.detail(params)
-    const action = initPageData(result)
+    let { result } = await categoryApi.list()
+    const action = initCategoryList(result)
     dispatch(action)
   }
 }
