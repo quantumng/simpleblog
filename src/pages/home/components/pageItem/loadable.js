@@ -1,14 +1,13 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import {
-  PageWrapper,
-  NoData
+  NoPage
 } from './style';
 
 const LoadableComponent = Loadable({
   loader: () => import ('./'),
   loading () {
-    return <PageWrapper><NoData>正在加载...</NoData></PageWrapper>
+    return <NoPage>正在加载...</NoPage>
   }
 })
 

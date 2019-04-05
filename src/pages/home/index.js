@@ -33,7 +33,7 @@ class Home extends PureComponent {
         <HomeRight>
           <CategoryWrapper>
             <h2 className={'title'}>分类目录</h2>
-            { categoryList.map(item => {
+            { categoryList && categoryList.length ? categoryList.map(item => {
               return (
                 <CategoryItem key={item._id}>
                     <Link to={{
@@ -41,7 +41,7 @@ class Home extends PureComponent {
                     }}>{`${item.name}(${item.pages.length})`}</Link>
                 </CategoryItem>
               )
-            }) }
+            }) : <CategoryItem>暂无分类</CategoryItem> }
           </CategoryWrapper>
         </HomeRight>
         <HomeLeft>

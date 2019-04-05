@@ -6,6 +6,15 @@ export const PageWrapper = styled.div`
   padding: 20px;
   box-sizing: border-box;
 `
+export const NoData = styled.div`
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 20px auto;
+  box-sizing: border-box;
+  text-align: center;
+`
 
 export const PageContent = styled.div`
   width: 80%;

@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import * as actionCreator from '../../../home/store/actionCreator';
 import {
   PageContent,
+  NoPage,
   LoadMore
 } from './style';
 
@@ -28,21 +29,21 @@ function Content (props) {
 
 class Page extends PureComponent {
   componentDidMount () {
-    this.getList()
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      console.log(nextProps)
-      this.getList()
-    }
-  }
-  getList () {
     const { match, getPageList } = this.props
     const { params } = match
     getPageList(params)
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      console.log('nextProps.match.params.id', nextProps.match.params.id)
+      console.log('this.props.match.params.id', this.props.match.params.id)
+      const { getPageList } = this.props
+      getPageList(nextProps.match.params)
+    }
+  }
   render () {
-    const { pageList, getMoreList, currentPage, hasMorePage } = this.props
+    const { pageList, getMoreList, currentPage, hasMorePage, match } = this.props
+    const { params } = match
     if (pageList.length) {
       return <div>
         {pageList.map(item => {
@@ -50,13 +51,14 @@ class Page extends PureComponent {
           <Content data={item} />
         </PageContent>
       })}
-        {hasMorePage ? <LoadMore onClick={() => {getMoreList(currentPage)}}>加载更多...</LoadMore> : <LoadMore>没有更多文章了</LoadMore>}
+        {hasMorePage && !(params && params.id) ? <LoadMore onClick={() => {getMoreList(currentPage)}}>加载更多...</LoadMore> : <LoadMore>没有更多文章了</LoadMore>}
       </div>
     } else {
-      return <div>没有文章</div>
+      return <NoPage>暂无文章</NoPage>
     }
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     hasMorePage: state.getIn(['home', 'hasMorePage']),

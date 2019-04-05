@@ -19,7 +19,7 @@ export const Logo = styled.div`
 	}
 `
 export const Nav = styled.div`
-  width: 70%;
+  width: 60%;
   height: 100%;
   box-sizing: border-box;
   margin: 0 auto;

@@ -35,6 +35,16 @@ export const PageContent = styled.div`
   }
 `
 
+  export const NoPage = styled.div`
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    text-align: center;
+`
+
 export const LoadMore = styled.div`
 	width: 100%;
 	height: 40px;

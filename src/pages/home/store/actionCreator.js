@@ -20,8 +20,8 @@ export const getPageList = (params) => {
 
 export const getMoreList = (currentPage) => {
   return async (dispatch) => {
-    let { result } = await pageApi.list({page: currentPage})
     currentPage++
+    let { result } = await pageApi.list({page: currentPage})
     dispatch(addPageList(result, currentPage))
   }
 }
