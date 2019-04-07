@@ -1,5 +1,5 @@
 import http from '../lib/http'
-const baseUrl = '/category'
+const baseUrl = '/api/blog/category'
 
 export default {
   list () {
