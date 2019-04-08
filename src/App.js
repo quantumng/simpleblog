@@ -6,7 +6,7 @@ import Header from './common/header/index.js';
 import Footer from './common/footer/index.js';
 import Home from './pages/home';
 import Detail from './pages/detail/loadable';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { HashRouter as Router, Route} from 'react-router-dom';
 
 class App extends Component {
   render() {
